@@ -31,7 +31,7 @@ php artisan config:publish yottaram/multi-login-restrictor
 
 In particular, make sure the `users_table` property is set to the name of the users table in your application.  You may also change the field on the users table that indicates how many simultaneous logins each user will be allowed.  To do this edit `users_num_seats_field`.
 
-Run the artisan command to generate migrations which will add a "number of simultaneous logins" field to the users table and a "user logins" table:
+Run the artisan command to generate migrations which will add a `num_seats` field to the users table and a `users_logins` table:
 
 ```
 php artisan multi-login:make-migration
