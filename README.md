@@ -12,7 +12,7 @@ There is a current dev dependency on [Laravel 4 Generators](https://github.com/J
 Add the composer definition to your composer.json:
 
 ```json
-"yottaram/administrator-config": "dev-master"
+"yottaram/multi-login-restrictor": "dev-master"
 ```
 
 And run `composer update`.  When it is installed, register the service provider in `app/config/app.php` in the `providers` array:
