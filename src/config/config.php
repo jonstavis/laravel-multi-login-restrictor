@@ -16,15 +16,10 @@ return [
 
     /**
      * Field name that will store the number of multi logins or "seats" in the users table
+     * Update this field on any user row to add/remove seats from that account
      *
      */
     'users_num_seats_field' => 'num_seats',
-
-    /**
-     * The number of simultaneous logins allowed per user
-     *
-     */
-    'simultaneous_logins' => 1,
 
     /**
      * The name of the session key for a user's last login
