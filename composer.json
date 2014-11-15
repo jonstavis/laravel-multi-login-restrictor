@@ -1,0 +1,26 @@
+{
+    "name": "yottaram/multi-login-restrictor",
+    "description": "",
+    "authors": [
+        {
+            "name": "Jon Stavis",
+            "email": "jstavis@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*"
+    },
+    "require-dev": {
+        "way/generators": "2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Yottaram\\MultiLoginRestrictor\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
