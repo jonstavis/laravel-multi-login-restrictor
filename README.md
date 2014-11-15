@@ -54,4 +54,5 @@ Users by default will be allowed to login at most one simultaneous time.  You ma
 If the maximum number of logins is exceeded for a user, the oldest user session that logged in will be logged out and Redirected to '/'.
 
 TODO - configure the route a user is sent to when logged out.
+
 TODO - if request is made via Ajax, then just send a 403 response.
