@@ -14,14 +14,33 @@ Route::filter('multi-login-restrict', function()
 
     if ($numSeats < $numLogins) 
     {
-        $earliestLogin = UserLogin::where('user_id', $user->id)->orderBy('login_time')->first();
-        $userLoginTime = Session::get(Config::get('multi-login-restrictor::login_time_session_key'));
-
-        if ($userLoginTime->format('Y-m-d H:i:s') == $earliestLogin->login_time)
+        // delete the earlier logins to bring the number back up to the allowed quota
+        $logins = UserLogin::where('user_id', $user->id)->orderBy('login_time')->take($numLogins - $numSeats)->get();
+        $loginIds = [];
+        foreach ($logins as $login) 
         {
-            Log::info('Logging out user due to maximum seat limit reached.  User id: ' . $user->id);
-            Auth::logout();
+            $loginIds[]= $login->id;
+        }
+        UserLogin::whereIn('id', $loginIds)->delete();
+    }
 
+    $userLoginTime = Session::get(Config::get('multi-login-restrictor::login_time_session_key'));
+
+    // get the login associated with this user's session
+    $userLogin = UserLogin::where('user_id', $user->id)->where('login_time', $userLoginTime)->first();
+
+    // if it's missing then log him out
+    if (!$userLogin)
+    {
+        Log::info('Logging out user due to maximum seat limit reached.  User id: ' . $user->id);
+        Auth::logout();
+
+        if (Request::ajax())
+        {
+            App::abort(403);
+        }
+        else
+        {
             return Redirect::guest('login');
         }
     }
